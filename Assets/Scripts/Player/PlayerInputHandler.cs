@@ -9,29 +9,20 @@ public class PlayerInputHandler : MonoBehaviour
     [Header("Input Action Asset")] [SerializeField]
     private InputActionAsset playerControls;
 
-    [Header("Action Map Name Reference")] [SerializeField]
     private string playerActionMapName = "Player";
-
-    [SerializeField] private string uiActionMapName = "UI";
-
-    [Header("Player Action Name References")] [SerializeField]
+    private string uiActionMapName = "UI";
     private string movement = "Move";
-
-    [SerializeField] private string rotation = "Look";
-    [SerializeField] private string sprint = "Sprint";
-
-
-    [Header("UI Action Name References")] [SerializeField]
+    private string rotation = "Rotation";
+    private string sprint = "Sprint";
     private string pause = "Pause";
-
-    [SerializeField] private string resume = "Resume";
+    private string resume = "Resume";
 
     // Player InputActions
     private InputAction _movementAction;
     private InputAction _rotationAction;
     private InputAction _sprintAction;
     private InputAction _pauseAction;
-    private InputAction _mayusAction;
+    //private InputAction _mayusAction;
 
 
     // Player InputActions
@@ -48,7 +39,7 @@ public class PlayerInputHandler : MonoBehaviour
     public Vector2 MovementInput { get; private set; }
     public Vector2 RotationInput { get; private set; }
     public bool SprintTriggered { get; private set; }
-    public bool IsInMayus { get; private set; }
+    //public bool IsInMayus { get; private set; }
 
     private void EnablePlayerInput()
     {
@@ -67,8 +58,9 @@ public class PlayerInputHandler : MonoBehaviour
         SubscribeActionValuesToInputEvents();
     }
 
-    private void SubscribeActionValuesToInputEvents()
+    private void SubscribeActionValuesToInputEvents() 
     {
+        Debug.Log("SubscribeActionValuesToInputEvents");
         _movementAction.performed += OnPlayerMove;
         _movementAction.canceled += OnStopPlayerMove;
 
@@ -84,8 +76,8 @@ public class PlayerInputHandler : MonoBehaviour
         _pauseAction.performed += OnPause;
         _resumeAction.performed += OnResume;
 
-        _mayusAction.performed += _ => IsInMayus = true;
-        _mayusAction.canceled += _ => IsInMayus = false;
+        //_mayusAction.performed += _ => IsInMayus = true;
+        //_mayusAction.canceled += _ => IsInMayus = false;
     }
 
 
@@ -103,6 +95,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void OnPlayerMove(InputAction.CallbackContext ctx)
     {
+        Debug.Log("OnPlayerMove");
         MovementEvent?.Invoke();
         MovementInput = ctx.ReadValue<Vector2>();
     }
@@ -115,28 +108,16 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.activeSceneChanged += OnActiveSceneChanged;
         SetGameplay();
+        EnablePlayerInput();
     }
 
 
     private void OnDisable()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-        SceneManager.activeSceneChanged -= OnActiveSceneChanged;
         playerControls.FindActionMap(playerActionMapName).Disable();
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        EnablePlayerInput();
-    }
-
-    private void OnActiveSceneChanged(Scene previousScene, Scene newScene)
-    {
-        EnablePlayerInput();
-    }
 
     public void SetGameplay()
     {

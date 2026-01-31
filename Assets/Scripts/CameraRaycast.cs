@@ -17,10 +17,11 @@ public class CameraRaycast : UnityUtils.Singleton<CameraRaycast>
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            TryInteract();
-        }
+        //TODO: INPUT NUEVO
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    TryInteract();
+        //}
     }
 
 

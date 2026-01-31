@@ -14,8 +14,8 @@ public class PlayerMovement : MonoBehaviour
 
 
     [Header("Look Parameters")]
-    [SerializeField] public float xMouseSensitivity = 0.1f;
-    [SerializeField] public float yMouseSensitivity = 1.0f;
+    [SerializeField] public float xMouseSensitivity;
+    [SerializeField] public float yMouseSensitivity;
     [SerializeField] private float upDownLookRange = 80f;
 
     [Header("Footstep Parameters")]
@@ -43,7 +43,6 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        playerInputHandler = GetComponent<PlayerInputHandler>();
         alignedRotation = new Vector2(mainCamera.transform.position.x, mainCamera.transform.position.y);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
