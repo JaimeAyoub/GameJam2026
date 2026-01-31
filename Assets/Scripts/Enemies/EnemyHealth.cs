@@ -51,8 +51,6 @@ public class EnemyHealth : MonoBehaviour
 
     private void PlayDamageSound()
     {
-        SoundType soundType;
-
         switch (enemyType)
         {
             case EnemyType.Gula:

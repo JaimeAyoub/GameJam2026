@@ -5,15 +5,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent (typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Speeds")]
     [SerializeField] private float walkSpeed = 3.0f;
     [SerializeField] private float sprintMultiplier = 2.0f;
 
-    [Header("Jump Parameters")]
-    [SerializeField] private float jumpForce = 5.0f;
-    [SerializeField] private float gravityMultiplier = 1.0f;
 
     [Header("Look Parameters")]
     [SerializeField] public float xMouseSensitivity = 0.1f;
@@ -44,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
+        characterController = GetComponent<CharacterController>();
+        playerInputHandler = GetComponent<PlayerInputHandler>();
         alignedRotation = new Vector2(mainCamera.transform.position.x, mainCamera.transform.position.y);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (!Application.isPlaying || CombatManager.instance.isCombat) return;
+    
 
         HandleMovement();
         HandleRotation();
@@ -95,30 +95,13 @@ public class PlayerMovement : MonoBehaviour
         return worldDirection.normalized;
     }
 
-    private void HandleJumping()
-    {
-        if (characterController.isGrounded)
-        {
-            currentMovement.y = -0.5f;
-
-            if (playerInputHandler.JumpTriggered)
-            {
-                currentMovement.y = jumpForce;
-            }
-        }
-        else
-        {
-            currentMovement.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
-        }
-    }
-
     private void HandleMovement()
     {
         Vector3 worldDirection = CalculateWorldDirection();
         currentMovement.x = worldDirection.x * CurrentSpeed;
         currentMovement.z = worldDirection.z * CurrentSpeed;
 
-        HandleJumping();
+     
         characterController.Move(currentMovement * Time.deltaTime);
     }
 

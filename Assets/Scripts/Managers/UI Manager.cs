@@ -37,7 +37,9 @@ public class UIManager : UnityUtils.Singleton<UIManager>
         PlayerInputHandler.ResumeEvent -= Pause;
     }
 
+#pragma warning disable CS0114 // El miembro oculta el miembro heredado. Falta una contraseña de invalidación
     private void Awake()
+#pragma warning restore CS0114 // El miembro oculta el miembro heredado. Falta una contraseña de invalidación
     {
         _numberOfEnemies = 4;
         base.Awake();

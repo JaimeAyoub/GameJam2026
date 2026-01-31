@@ -127,7 +127,7 @@ public class CombatManager : MonoBehaviour
         {
             if (_currentturn == Combatturn.PlayerTurn)
             {
-                inputHandler.EnableTyping();
+                
                 Debug.Log("Turno player");
 
 
@@ -139,7 +139,7 @@ public class CombatManager : MonoBehaviour
             }
             else if (_currentturn == Combatturn.EnemyTurn)
             {
-                inputHandler.DesactivateTyping();
+                
                 // DamageVignette.DOFade(1, 0.125f)
                 //     .SetLoops(2, LoopType.Yoyo);
                 if (enemy != null)

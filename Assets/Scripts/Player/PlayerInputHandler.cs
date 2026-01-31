@@ -13,19 +13,13 @@ public class PlayerInputHandler : MonoBehaviour
     private string playerActionMapName = "Player";
 
     [SerializeField] private string uiActionMapName = "UI";
-    [SerializeField] private string typingActionMapName = "Typing";
 
     [Header("Player Action Name References")] [SerializeField]
-    private string movement = "Movement";
+    private string movement = "Move";
 
-    [SerializeField] private string rotation = "Rotation";
-    [SerializeField] private string jump = "Jump";
+    [SerializeField] private string rotation = "Look";
     [SerializeField] private string sprint = "Sprint";
 
-    [Header("Type Action Name References")] [SerializeField]
-    private string typing = "Type";
-
-    [SerializeField] private string mayus = "Mayus";
 
     [Header("UI Action Name References")] [SerializeField]
     private string pause = "Pause";
@@ -35,13 +29,10 @@ public class PlayerInputHandler : MonoBehaviour
     // Player InputActions
     private InputAction _movementAction;
     private InputAction _rotationAction;
-    private InputAction _jumpAction;
     private InputAction _sprintAction;
     private InputAction _pauseAction;
     private InputAction _mayusAction;
 
-    // Typing InputActions
-    private InputAction _typingAction;
 
     // Player InputActions
     private InputAction _resumeAction;
@@ -50,14 +41,12 @@ public class PlayerInputHandler : MonoBehaviour
     public event Action PauseEvent;
     public static event Action MovementEvent;
     public static event Action StopMovementEvent;
-    public event Action<char> KeyTypedEvent;
 
     // UI Events
     public event Action ResumeEvent;
 
     public Vector2 MovementInput { get; private set; }
     public Vector2 RotationInput { get; private set; }
-    public bool JumpTriggered { get; private set; }
     public bool SprintTriggered { get; private set; }
     public bool IsInMayus { get; private set; }
 
@@ -65,18 +54,15 @@ public class PlayerInputHandler : MonoBehaviour
     {
         var playerMapReference = playerControls.FindActionMap(playerActionMapName);
         var uiMapReference = playerControls.FindActionMap(uiActionMapName);
-        var typingMapReference = playerControls.FindActionMap(typingActionMapName);
+        
 
         _movementAction = playerMapReference.FindAction(movement);
         _rotationAction = playerMapReference.FindAction(rotation);
-        _jumpAction = playerMapReference.FindAction(jump);
+        
         _sprintAction = playerMapReference.FindAction(sprint);
         _pauseAction = playerMapReference.FindAction(pause);
 
         _resumeAction = uiMapReference.FindAction(resume);
-
-        _typingAction = typingMapReference.FindAction(typing);
-        _mayusAction = typingMapReference.FindAction(mayus);
 
         SubscribeActionValuesToInputEvents();
     }
@@ -91,10 +77,6 @@ public class PlayerInputHandler : MonoBehaviour
         _rotationAction.canceled += _ => RotationInput = Vector2.zero;
 
 
-        _jumpAction.performed += _ => JumpTriggered = true;
-        _jumpAction.canceled += _ => JumpTriggered = false;
-
-
         _sprintAction.performed += _ => SprintTriggered = true;
         _sprintAction.canceled += _ => SprintTriggered = false;
 
@@ -102,25 +84,10 @@ public class PlayerInputHandler : MonoBehaviour
         _pauseAction.performed += OnPause;
         _resumeAction.performed += OnResume;
 
-        _typingAction.performed += OnKeyTyped;
         _mayusAction.performed += _ => IsInMayus = true;
         _mayusAction.canceled += _ => IsInMayus = false;
     }
 
-    private void OnKeyTyped(InputAction.CallbackContext ctx)
-    {
-//        Debug.Log(ctx.control.name);
-        var endChar = ctx.control.name;
-        //      Debug.Log(endChar);
-        if (endChar == "space")
-        {
-            KeyTypedEvent?.Invoke(' ');
-            Debug.Log(endChar);
-        }
-
-        KeyTypedEvent?.Invoke(endChar[0]);
-        Debug.Log(endChar);
-    }
 
     private void OnPause(InputAction.CallbackContext ctx)
     {
@@ -174,32 +141,20 @@ public class PlayerInputHandler : MonoBehaviour
     public void SetGameplay()
     {
         playerControls.FindActionMap(playerActionMapName).Enable();
-        playerControls.FindActionMap(typingActionMapName).Enable();
         playerControls.FindActionMap(uiActionMapName).Disable();
     }
 
     public void SetUI()
     {
         playerControls.FindActionMap(playerActionMapName).Disable();
-        playerControls.FindActionMap(typingActionMapName).Disable();
         playerControls.FindActionMap(uiActionMapName).Enable();
     }
 
     public void SetCombat()
     {
         playerControls.FindActionMap(playerActionMapName).Disable();
-        playerControls.FindActionMap(typingActionMapName).Enable();
         playerControls.FindActionMap(uiActionMapName).Disable();
     }
 
-    public void DesactivateTyping()
-    {
-        playerControls.FindActionMap(typingActionMapName).Disable();
-    }
-
-    public void EnableTyping()
-    {
-        playerControls.FindActionMap(typingActionMapName).Enable();
-    }
 
 }
