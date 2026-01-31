@@ -28,17 +28,24 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerInputHandler playerInputHandler;
     [SerializeField] private GameObject cameraHolder;
 
+    [SerializeField] private PlayerInputHandler PlayerInputHandler;
+
     private Vector2 alignedRotation;
     private Vector3 currentMovement;
     private float verticalRotation;
     private float stepTimer;
     private bool wasGrounded;
 
+    private bool _isPaused = false;
+    private bool _isNoteOpen = false;
+
     private float CurrentSpeed => walkSpeed * (playerInputHandler.SprintTriggered ? sprintMultiplier : 1);
     private float CurrentStepInterval => playerInputHandler.SprintTriggered ? sprintStepInterval : walkStepInterval;
 
     //INTEGRAR CINEMACHINE
     public CinemachineCamera mainCamera;
+
+
 
     void Awake()
     {
@@ -127,5 +134,30 @@ public class PlayerMovement : MonoBehaviour
     public bool IsMove()
     {
         return currentMovement.magnitude > 0.1f;
+    }
+
+    void Pause()
+    {
+        if (_isNoteOpen) return;
+
+        _isPaused = !_isPaused;
+        if (_isPaused == true)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            PlayerInputHandler.SetUI();
+            
+        }
+        else if (_isPaused == false)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Time.timeScale = 1;
+            
+            if (PlayerInputHandler != null)
+            {
+                PlayerInputHandler.SetGameplay();
+            }
+        }
     }
 }

@@ -83,6 +83,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void OnPause(InputAction.CallbackContext ctx)
     {
+        
         PauseEvent?.Invoke();
         SetUI();
     }
@@ -95,7 +96,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void OnPlayerMove(InputAction.CallbackContext ctx)
     {
-        Debug.Log("OnPlayerMove");
+        
         MovementEvent?.Invoke();
         MovementInput = ctx.ReadValue<Vector2>();
     }

@@ -26,6 +26,7 @@ public class Page : MonoBehaviour
     private Coroutine _animationCoroutine;
     private Coroutine _audioCoroutine;
 
+
     private void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
@@ -179,4 +180,10 @@ public class Page : MonoBehaviour
 
         _audioSource.enabled = false;
     }
+
+    private void OnPause()
+    {
+        
+    }
+
 }

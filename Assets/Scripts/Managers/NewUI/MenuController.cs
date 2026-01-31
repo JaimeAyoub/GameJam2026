@@ -9,9 +9,28 @@ public class MenuController : MonoBehaviour
     [SerializeField] private Page initialPage;
     [SerializeField] private GameObject firstFocusItem;
 
+    [SerializeField] private PlayerInputHandler playerInputHandler;
+
     private Canvas _rootCanvas;
 
     private readonly Stack<Page> _pageStack = new Stack<Page>();
+
+    private void OnEnable()
+    {
+        playerInputHandler.PauseEvent += OnPause;
+        playerInputHandler.ResumeEvent += OnCancel;
+    }
+
+    private void OnDisable()
+    {
+        playerInputHandler.PauseEvent -= OnPause;
+        playerInputHandler.ResumeEvent -= OnCancel;
+    }
+
+    private void OnPause()
+    {
+        PushPage(initialPage);
+    }
 
     private void Awake()
     {
