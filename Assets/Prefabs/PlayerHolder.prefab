@@ -75,8 +75,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 3
   sprintMultiplier: 2
-  xMouseSensitivity: 2
-  yMouseSensitivity: 2
+  xMouseSensitivity: 30
+  yMouseSensitivity: 30
   upDownLookRange: 80
   walkStepInterval: 0.5
   sprintStepInterval: 0.3
@@ -184,8 +184,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3936433896334135371}
   - component: {fileID: 7378294597741407383}
-  - component: {fileID: 8621941362691013949}
-  - component: {fileID: 4929770871129126834}
   - component: {fileID: 3467034323999259250}
   m_Layer: 6
   m_Name: Player
@@ -218,48 +216,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7656004186870676313}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &8621941362691013949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7656004186870676313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be3a9dbbc0a98d849aeab97d49a61abf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 2
-  _volumeProfile: {fileID: 11400000, guid: cbea3553215783e40b933a560601f35d, type: 2}
-  vignette: {fileID: 0}
-  vignetteIntensity: 0.25
-  tweenDuration: 0.25
-  intensityCameraShake: 7
-  durationCameraShake: 0.1
-  candleHealthSprites:
-  - {fileID: -1614266600, guid: 7873266345a8b0549b7d8898a8af5401, type: 3}
-  - {fileID: -35958546, guid: 7873266345a8b0549b7d8898a8af5401, type: 3}
-  - {fileID: 288630593, guid: 7873266345a8b0549b7d8898a8af5401, type: 3}
-  - {fileID: 92651698, guid: 7873266345a8b0549b7d8898a8af5401, type: 3}
-  - {fileID: 236912569, guid: 7873266345a8b0549b7d8898a8af5401, type: 3}
-  - {fileID: 2106368223, guid: 7873266345a8b0549b7d8898a8af5401, type: 3}
-  - {fileID: -1892297091, guid: 7873266345a8b0549b7d8898a8af5401, type: 3}
-  candleHealthSpriteRenderer: {fileID: 0}
---- !u!114 &4929770871129126834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7656004186870676313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0ffb57e97421c46bee5012c8b922a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!23 &3467034323999259250
 MeshRenderer:
   m_ObjectHideFlags: 0
