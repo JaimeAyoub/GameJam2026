@@ -22,7 +22,7 @@ public class DialogueSystem : MonoBehaviour
 
     void Start()
     {
-       cinemachine = FindObjectOfType<CinemachineCamera>();
+       cinemachine = FindFirstObjectByType<CinemachineCamera>();
     }
 
     // Update is called once per frame

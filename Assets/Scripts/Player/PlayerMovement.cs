@@ -34,10 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 currentMovement;
     private float verticalRotation;
     private float stepTimer;
-    private bool wasGrounded;
 
-    private bool _isPaused = false;
-    private bool _isNoteOpen = false;
 
     private float CurrentSpeed => walkSpeed * (playerInputHandler.SprintTriggered ? sprintMultiplier : 1);
     private float CurrentStepInterval => playerInputHandler.SprintTriggered ? sprintStepInterval : walkStepInterval;
@@ -54,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         stepTimer = 0f;
-        wasGrounded = characterController.isGrounded;
+        //wasGrounded = characterController.isGrounded;
     }
 
     void Update()
@@ -136,28 +133,4 @@ public class PlayerMovement : MonoBehaviour
         return currentMovement.magnitude > 0.1f;
     }
 
-    void Pause()
-    {
-        if (_isNoteOpen) return;
-
-        _isPaused = !_isPaused;
-        if (_isPaused == true)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            PlayerInputHandler.SetUI();
-            
-        }
-        else if (_isPaused == false)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            Time.timeScale = 1;
-            
-            if (PlayerInputHandler != null)
-            {
-                PlayerInputHandler.SetGameplay();
-            }
-        }
-    }
 }
