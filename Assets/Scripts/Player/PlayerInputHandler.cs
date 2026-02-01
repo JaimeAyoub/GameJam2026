@@ -88,6 +88,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void OnResume(InputAction.CallbackContext ctx)
     {
+        Debug.Log("OnResumeEvent");
         ResumeEvent?.Invoke();
         
     }
