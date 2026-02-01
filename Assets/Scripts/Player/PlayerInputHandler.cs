@@ -60,7 +60,6 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void SubscribeActionValuesToInputEvents() 
     {
-        Debug.Log("SubscribeActionValuesToInputEvents");
         _movementAction.performed += OnPlayerMove;
         _movementAction.canceled += OnStopPlayerMove;
 
@@ -82,16 +81,15 @@ public class PlayerInputHandler : MonoBehaviour
 
 
     private void OnPause(InputAction.CallbackContext ctx)
-    {
-        
+    {   
         PauseEvent?.Invoke();
-        SetUI();
+        
     }
 
     private void OnResume(InputAction.CallbackContext ctx)
     {
         ResumeEvent?.Invoke();
-        SetGameplay();
+        
     }
 
     private void OnPlayerMove(InputAction.CallbackContext ctx)
@@ -122,12 +120,14 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void SetGameplay()
     {
+        Debug.Log("SET GAMEPLAY");
         playerControls.FindActionMap(playerActionMapName).Enable();
         playerControls.FindActionMap(uiActionMapName).Disable();
     }
 
     public void SetUI()
     {
+        Debug.Log("SET UI");
         playerControls.FindActionMap(playerActionMapName).Disable();
         playerControls.FindActionMap(uiActionMapName).Enable();
     }
@@ -137,6 +137,4 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.FindActionMap(playerActionMapName).Disable();
         playerControls.FindActionMap(uiActionMapName).Disable();
     }
-
-
 }

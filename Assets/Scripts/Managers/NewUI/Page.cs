@@ -181,9 +181,6 @@ public class Page : MonoBehaviour
         _audioSource.enabled = false;
     }
 
-    private void OnPause()
-    {
-        
-    }
+    
 
 }
