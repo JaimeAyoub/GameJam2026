@@ -12,7 +12,7 @@ public class CameraRaycast : UnityUtils.Singleton<CameraRaycast>
     void Awake()
 #pragma warning restore CS0114 
     {
-        layerMask = LayerMask.GetMask("Door", "Player", "Note");
+        layerMask = LayerMask.GetMask("Door", "Player", "Note", "Items");
     }
 
     void Update()
@@ -44,6 +44,15 @@ public class CameraRaycast : UnityUtils.Singleton<CameraRaycast>
                 note.ShowNote();
                 return;
             }
+
+            Key key = hit.collider.GetComponent<Key>();
+            if (key != null)
+            {
+                KeyManager.Instance.AddKey(key.GetKeyType());
+                Destroy(key.gameObject);
+                return;
+            }
         }
     }
 }
+

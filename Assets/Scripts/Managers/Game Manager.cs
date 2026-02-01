@@ -7,6 +7,8 @@ public class GameManager : Singleton<GameManager>
 {
     public bool isPlayerSound;
     public SoundData walkSoundData;
+
+
     
     private void OnEnable()
     {
