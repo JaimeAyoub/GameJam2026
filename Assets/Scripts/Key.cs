@@ -5,7 +5,7 @@ using UnityEngine;
     {
         baño,
         sotano,
-        cuarto
+        cuarto,
     }
 public class Key : MonoBehaviour
 {

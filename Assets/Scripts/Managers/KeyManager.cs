@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityUtils;
@@ -24,5 +25,11 @@ public class KeyManager : Singleton<KeyManager>
     public void RemoveKey(KeyType key) {
         if(keys.Contains(key))
             keys.Remove(key);
+    }
+
+    public bool HasKey(DoorType doorType)
+    {
+        KeyType keyType = (KeyType)Enum.Parse(typeof(KeyType), doorType.ToString());
+        return keys.Contains(keyType);
     }
 }

@@ -4,6 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+public enum DoorType
+{
+    baño,
+    sotano,
+    cuarto,
+    noKey
+}
 public class DoorScript : MonoBehaviour
 {
     public bool isOpen;
@@ -12,6 +19,8 @@ public class DoorScript : MonoBehaviour
     private Vector3 _closedRotation;
     private Vector3 _openRotation;
     private Tween _currentTween;
+
+    public DoorType doorType;
 
 
     private void Start()
@@ -23,10 +32,7 @@ public class DoorScript : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && CameraRaycast.Instance.canOpen)
-        {
-            ToggleDoor();
-        }
+     
     }
 
     public void ToggleDoor()
