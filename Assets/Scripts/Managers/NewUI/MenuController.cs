@@ -72,18 +72,16 @@ public class MenuController : MonoBehaviour
 
     private void OnCancel()
     {
+        Debug.Log("OnCancel");
         if (_rootCanvas.enabled && _rootCanvas.gameObject.activeInHierarchy)
         {
             if (_pageStack.Count > 1)
             {
                 PopPage();
-                if(_pageStack.Peek() == initialPage)
-                {
-                    playerInputHandler.SetGameplay();
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
-                    Time.timeScale = 1;
-                }
+                playerInputHandler.SetGameplay();
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                Time.timeScale = 1;
             }
         }
     }
